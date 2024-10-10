@@ -25,23 +25,35 @@ def intro():
     print('4. EXIT')
 
 def main():
-    balance = 10000
-    intro()
-    choice = eval(input('Enter your choice --> '))
-    match(choice):
-        case 1:
-            balance -= 50
-            balance += random.choice(basic)
-            print(f'Your balance is now {balance}')
-        case 2: 
-            balance -= 500
-            balance += random.choice(elite)
-            print(f'Your balance is now {balance}')
-        case 3:
-            balance -= 5000
-            balance += random.choice(premium)
-            print(f'Your balance is now {balance}')
-        case 4:
-            print('GOODBYE!! SEE YOU SOON!')
+    balance = 100000
+    
+    while True:
+        intro()
+        choice = eval(input('Enter your choice --> '))
+        match(choice):
+            case 1:
+                if balance < 50:
+                    print('Insufficient Balance')
+                else:
+                    balance -= 50
+                    balance += random.choice(basic)
+                    print(f'Your balance is now {balance}')
+            case 2:
+                if balance < 500:
+                    print('Insufficient Balance')
+                else: 
+                    balance -= 500
+                    balance += random.choice(elite)
+                    print(f'Your balance is now {balance}')
+            case 3:
+                if balance < 5000:
+                    print('Insufficient Balance')
+                else:
+                    balance -= 5000
+                    balance += random.choice(premium)
+                    print(f'Your balance is now {balance}')
+            case 4:
+                print('GOODBYE!! SEE YOU SOON!')
+                break
 
 main()
