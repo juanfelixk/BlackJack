@@ -24,8 +24,8 @@ def intro():
     print('3. PREMIUM BOX (COST: 5000)')
     print('4. EXIT')
 
-def main():
-    balance = 10000
+def main(blnc: int):
+    balance = blnc
     
     while True:
         intro()
@@ -54,6 +54,20 @@ def main():
                     print(f'Your balance is now {balance}')
             case 4:
                 print('GOODBYE!! SEE YOU SOON!')
+                print(
+    '''
+    Welcome to ___
+    =======
+    1) Blackjack
+    2) Gacha
+    3) Check balance
+    4) Save
+    5) Load
+    6) Quit
+    '''
+    )
                 break
+            
 
-main()
+if __name__ == '__main__':
+    main()
