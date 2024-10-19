@@ -1,5 +1,7 @@
 from random import randint
 import os 
+import something as smth
+
 cards=[
     [1,2,3,4,5,6,7,8,9,"J","Q","K","A"], #heart
     [1,2,3,4,5,6,7,8,9,"J","Q","K","A"], #diamond
@@ -9,6 +11,8 @@ cards=[
 totalavailablecards=[12,12,12,12] # Theres a random bug relating to this idk how it happens or how to fix it
 suite=0
 value=0
+balance = smth.load_balance()
+
 def blackjack(blnc:int):
     running=True
     global totalavailablecards
@@ -16,7 +20,7 @@ def blackjack(blnc:int):
         global suite
         global value
         suite=randint(0,3)
-        value=randint(0,totalavailablecards[suite])
+        value=randint(0,totalavailablecards[suite] - 1)
         totalavailablecards[suite]-=1
 
     def userace():
@@ -88,39 +92,48 @@ def blackjack(blnc:int):
         print(f"Total user {totalplayervalue} Total dealer {totaldealervalue}")
         if (totaldealervalue > totalplayervalue or  totalplayervalue>21 or (totaldealervalue==21 and totalplayervalue!=21)) and totaldealervalue <= 21:
             print(f"You lost, the dealer had {totaldealervalue}")
-            input("Input anything to continue")
+            input("Input anything to continue: ")
             # TODO Reduce balance
+            global balance
+            balance -= bet
+            smth.save_balance(balance)
             os.system("cls")
         if totalplayervalue>totaldealervalue or totaldealervalue>21 or (totalplayervalue==21 and totaldealervalue!=21) and totalplayervalue <= 21:
             print(f"You won, the dealer had {totaldealervalue}")
-            input("Input anything to continue")
+            input("Input anything to continue: ")
             # TODO Increase balance
+            balance += bet
+            smth.save_balance(balance)
             os.system("cls")
         if (totalplayervalue>=21 and totaldealervalue>=21):
             print("Draw")
-            input("Input anything to continue")
+            input("Input anything to continue: ")
             os.system("cls")
 
     def checkautowin():
         if totaldealervalue==21 or totalplayervalue>21:
             print(f"You lost, the dealer had {totaldealervalue}")
-            input("Input anything to continue")
+            input("Input anything to continue: ")
             # TODO Reduce balance
+            global balance
+            balance -= bet
+            smth.save_balance(balance)
             os.system("cls")
             return False
         if totalplayervalue==21 or totaldealervalue>21:
             print(f"You won, the dealer had {totaldealervalue}")
-            input("Input anything to continue")
+            input("Input anything to continue: ")
             # TODO Increase balance
+            balance += bet
+            smth.save_balance(balance)
             os.system("cls")
             return False
         if totalplayervalue>=21 and totaldealervalue>=21:
             print("Draw")
-            input("Input anything to continue")
+            input("Input anything to continue: ")
             os.system("cls")
             return False
-        return True
-        
+        return True   
 
     while running:
         totalavailablecards=[12,12,12,12]
@@ -143,16 +156,19 @@ def blackjack(blnc:int):
     2. Quit
         ''')
         # for save and load i will try to implement later
-        balance=blnc
+        
         # TODO input the number to bet or smth
         optioninp=input()
         while optioninp != "1" and optioninp != "2": # Change later when more options are added
-            optioninp=input()
+            optioninp=input("Enter 1 to play or 2 to quit: ")
         match optioninp:
             case "1":
+                bet = int(input("Enter amount of bet: "))
+                while bet > balance or bet < 0:
+                    bet = int(input(f"The amount of bet {bet} is greater than your balance {balance}. Input a valid bet: "))
                 global suite,value,totalplayervalue,totaldealervalue,choices,dealerace,useraceoccurence,knownplayercard,playercardstring,knowndealercard
                 running=True
-                balance = blnc
+                
                 suite,value,totalplayervalue,totaldealervalue=0,0,0,0
                 choices,dealerace,useraceoccurence=[],[],[]
                 flag=True
@@ -168,7 +184,7 @@ def blackjack(blnc:int):
                 for i in knownplayercard:
                     playercardstring+=str(i[0])+" "+i[1]+", "
 
-                print(f"Your card is {playercardstring}and one of the dealer card is {str(showndealercard[0])+" "+showndealercard[1]}")
+                print(f"Your card is {playercardstring} and one of the dealer card is {str(showndealercard[0])+" "+showndealercard[1]}")
 
                 print("Would you like to hit (get more cards)? (y/n)")
                 userinp=input().lower()
@@ -210,9 +226,7 @@ Welcome to ___
 1) Blackjack
 2) Gacha
 3) Check balance
-4) Save
-5) Load
-6) Quit
+4) Quit
 '''
 )
                 
