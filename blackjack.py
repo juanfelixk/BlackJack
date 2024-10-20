@@ -8,7 +8,7 @@ cards=[
     [1,2,3,4,5,6,7,8,9,"J","Q","K","A"], #clover
     [1,2,3,4,5,6,7,8,9,"J","Q","K","A"] #spade
 ]
-totalavailablecards=[12,12,12,12] # Theres a random bug relating to this idk how it happens or how to fix it
+totalavailablecards=[12,12,12,12]
 suite=0
 value=0
 balance = smth.load_balance()
@@ -93,7 +93,6 @@ def blackjack(blnc:int):
         if (totaldealervalue > totalplayervalue or  totalplayervalue>21 or (totaldealervalue==21 and totalplayervalue!=21)) and totaldealervalue <= 21:
             print(f"You lost, the dealer had {totaldealervalue}")
             input("Input anything to continue: ")
-            # TODO Reduce balance
             global balance
             balance -= bet
             smth.save_balance(balance)
@@ -101,7 +100,6 @@ def blackjack(blnc:int):
         if totalplayervalue>totaldealervalue or totaldealervalue>21 or (totalplayervalue==21 and totaldealervalue!=21) and totalplayervalue <= 21:
             print(f"You won, the dealer had {totaldealervalue}")
             input("Input anything to continue: ")
-            # TODO Increase balance
             balance += bet
             smth.save_balance(balance)
             os.system("cls")
@@ -114,7 +112,6 @@ def blackjack(blnc:int):
         if totaldealervalue==21 or totalplayervalue>21:
             print(f"You lost, the dealer had {totaldealervalue}")
             input("Input anything to continue: ")
-            # TODO Reduce balance
             global balance
             balance -= bet
             smth.save_balance(balance)
@@ -123,7 +120,6 @@ def blackjack(blnc:int):
         if totalplayervalue==21 or totaldealervalue>21:
             print(f"You won, the dealer had {totaldealervalue}")
             input("Input anything to continue: ")
-            # TODO Increase balance
             balance += bet
             smth.save_balance(balance)
             os.system("cls")
@@ -155,11 +151,9 @@ def blackjack(blnc:int):
     1. Play 
     2. Quit
         ''')
-        # for save and load i will try to implement later
-        
-        # TODO input the number to bet or smth
+
         optioninp=input()
-        while optioninp != "1" and optioninp != "2": # Change later when more options are added
+        while optioninp != "1" and optioninp != "2": 
             optioninp=input("Enter 1 to play or 2 to quit: ")
         match optioninp:
             case "1":
