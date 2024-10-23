@@ -2,6 +2,7 @@
 Gacha Balance Box Mechanism
 1. If you choose gacha basic it costs 50
 2. If you choose gacha elite it costs 500
+3. If you choose gacha premium it costs 5000
 
 
 
@@ -45,21 +46,36 @@ def main(blnc: int):
                     print('Insufficient balance.')
                 else:
                     balance -= 50
-                    balance += random.choice(basic)
+                    basic_choice = random.choice(basic)
+                    if random.choice(basic) >= 80:
+                        print("Congratulations! You have gained a Blue Fish🐟! (insert fish ability)  ")
+                        balance += basic_choice
+                    else:
+                        balance += basic_choice
                     print(f'Your balance is now ${balance:,}.')
             case 2:
                 if balance < 500:
                     print('Insufficient balance.')
                 else: 
                     balance -= 500
-                    balance += random.choice(elite)
+                    elite_choice = random.choice(elite)
+                    if random.choice(elite) >= 800:
+                        print("Congratulations! You have gained a Magic Eggplant🍆! (insert eggplant ability)  ")
+                        balance += elite_choice
+                    else:
+                        balance += elite_choice
                     print(f'Your balance is now ${balance:,}')
             case 3:
                 if balance < 5000:
                     print('Insufficient balance.')
                 else:
                     balance -= 5000
-                    balance += random.choice(premium)
+                    premium_choice = random.choice(premium)
+                    if random.choice(premium) >= 80:
+                        print("Congratulations! You have gained a Shiny Crown👑! (insert crown ability)  ")
+                        balance += premium_choice
+                    else:
+                        balance += premium_choice
                     print(f'Your balance is now ${balance:,}')
             case 4:
                 save_balance(balance)
