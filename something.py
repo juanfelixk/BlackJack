@@ -15,7 +15,6 @@ import random
 basic = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
 elite = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 premium = [0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
-items = ["Blue Fish🐟", "Magic Eggplant🍆", "Shiny Crown👑"]
 def intro():
     print('\nWELCOME TO THE AMAZING GAMBLING EXPERIENCE')
     print('CHOOSE YOUR GAMBLING BOX')
@@ -46,36 +45,21 @@ def main(blnc: int):
                     print('Insufficient balance.')
                 else:
                     balance -= 50
-                    basic_choice = random.choice(basic)
-                    if random.choice(basic) >= 90:
-                        print(f"Congratulations! You have gained a {items[0]}! (worth ${basic_choice})")
-                        balance += basic_choice
-                    else:
-                        balance += basic_choice
+                    balance+= random.choice(basic)
                     print(f'Your balance is now ${balance:,}.')
             case 2:
                 if balance < 500:
                     print('Insufficient balance.')
                 else: 
                     balance -= 500
-                    elite_choice = random.choice(elite)
-                    if random.choice(elite) >= 900:
-                        print(f"Congratulations! You have gained a {items[1]}! (worth ${elite_choice})")
-                        balance += elite_choice
-                    else:
-                        balance += elite_choice
+                    balance += random.choice(elite)
                     print(f'Your balance is now ${balance:,}')
             case 3:
                 if balance < 5000:
                     print('Insufficient balance.')
                 else:
                     balance -= 5000
-                    premium_choice = random.choice(premium)
-                    if random.choice(premium) >= 9000:
-                        print(f"Congratulations! You have gained a {items[2]}! (worth ${premium_choice})")
-                        balance += premium_choice
-                    else:
-                        balance += premium_choice
+                    balance += random.choice(premium)
                     print(f'Your balance is now ${balance:,}')
             case 4:
                 save_balance(balance)
