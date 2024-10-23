@@ -47,8 +47,8 @@ def main(blnc: int):
                 else:
                     balance -= 50
                     basic_choice = random.choice(basic)
-                    if random.choice(basic) >= 80:
-                        print(f"Congratulations! You have gained a {items[0]}! (insert fish ability)  ")
+                    if random.choice(basic) >= 90:
+                        print(f"Congratulations! You have gained a {items[0]}! (worth ${basic_choice})")
                         balance += basic_choice
                     else:
                         balance += basic_choice
@@ -59,8 +59,8 @@ def main(blnc: int):
                 else: 
                     balance -= 500
                     elite_choice = random.choice(elite)
-                    if random.choice(elite) >= 800:
-                        print(f"Congratulations! You have gained a {items[1]}! (insert eggplant ability)  ")
+                    if random.choice(elite) >= 900:
+                        print(f"Congratulations! You have gained a {items[1]}! (worth ${elite_choice})")
                         balance += elite_choice
                     else:
                         balance += elite_choice
@@ -71,8 +71,8 @@ def main(blnc: int):
                 else:
                     balance -= 5000
                     premium_choice = random.choice(premium)
-                    if random.choice(premium) >= 80:
-                        print(f"Congratulations! You have gained a {items[2]}! (insert crown ability)  ")
+                    if random.choice(premium) >= 9000:
+                        print(f"Congratulations! You have gained a {items[2]}! (worth ${premium_choice})")
                         balance += premium_choice
                     else:
                         balance += premium_choice
